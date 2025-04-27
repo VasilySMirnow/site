@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import { FaTrash } from 'react-icons/fa6'
-export class Order extends Component {
 
+import CreateOrders from './createOrders'
+
+export class Order extends Component {
   
+
   render() {
-  
+    
+    
     return (
-      
+     
       <div className='item'>
-          <img src={"./img/" + this.props.item.img}></img>
-        <h2>{this.props.item.title}</h2>
-        <b>{this.props.item.price}$</b>
-        <FaTrash className='delete-icon' onClick={() => this.props.onDelete(this.props.item.id)}/>
+          <CreateOrders onDelete={this.props.onDelete} anChancheCount={this.props.anChancheCount} chancheCount={this.props.chancheCount} item={this.props.item} />
         
       </div>
     )

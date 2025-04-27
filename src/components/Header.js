@@ -4,11 +4,15 @@ import Order from './order';
 const showOrders = (props) => {
   let summ = 0;
   props.orders.forEach(el => {
-    summ += Number.parseFloat(el.price)
+    summ += Number.parseFloat(el.price * el.count)
   });
+  
   return (<div>
     {props.orders.map(el => (
-      <Order onDelete={props.onDelete} key={el.id} item={el} />
+   
+      
+      
+      <Order anChancheCount={props.anChancheCount} chancheCount={props.chancheCount} countOrders={props.countOrders} onDelete={props.onDelete} key={el.id} item={el} />
     ))}
     <p className='summ'>Сумма: {new Intl.NumberFormat().format(summ)}$</p>
   </div>)
@@ -22,6 +26,7 @@ const showNothing = () => {
   )
 }
 export default function Header(props) {
+   
   let [cartOpen,setCartOpen] =useState(false)
   return (
   <header>

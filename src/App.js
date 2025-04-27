@@ -16,7 +16,9 @@ class App extends React.Component {
          img:'стул4.jpg',
          desc:'lorem lorem ipsum',
          category:'chairs',
-         price:'49.99'
+         price:'49.99',
+         priceTotal:1,
+         count:1
       },
       {
         id:2,
@@ -24,7 +26,9 @@ class App extends React.Component {
         img:'стол.jpg',
         desc:'lorem lorem ipsum',
         category:'tables',
-        price:'492.99'
+        price:'492.99',
+        priceTotal:'492.99',
+        count:1
      },
      {
       id:3,
@@ -32,7 +36,9 @@ class App extends React.Component {
       img:'стол.jpg',
       desc:'lorem lorem ipsum',
       category:'tables',
-      price:'492.99'
+      price:'492.99',
+      priceTotal:'492.99',
+      count:1
    },
      {
       id:4,
@@ -40,7 +46,9 @@ class App extends React.Component {
       img:'диван.jpg',
       desc:'lorem lorem ipsum',
       category:'sofa',
-      price:'439.99'
+      price:'439.99',
+      priceTotal:'439.99',
+      count:1
    },
    {
     id:5,
@@ -48,7 +56,9 @@ class App extends React.Component {
     img:'диван.jpg',
     desc:'lorem lorem ipsum',
     category:'sofa',
-    price:'439.99'
+    price:'439.99',
+    priceTotal:'439.99',
+    count:1
  },
    {
     id:6,
@@ -56,7 +66,9 @@ class App extends React.Component {
     img:'светильник.jpg',
     desc:'lorem lorem ipsum',
     category:'light',
-    price:'45.99'
+    price:'45.99',
+    priceTotal:'45.99',
+    count:1
  },
  {
   id:7,
@@ -64,7 +76,9 @@ class App extends React.Component {
   img:'светильник.jpg',
   desc:'lorem lorem ipsum',
   category:'light',
-  price:'45.99'
+  price:'45.99',
+  priceTotal:'45.99',
+  count:1
 },
  {
   id:8,
@@ -72,7 +86,9 @@ class App extends React.Component {
   img:'стул4.jpg',
   desc:'lorem lorem ipsum',
   category:'chairs',
-  price:'32.99'
+  price:'32.99',
+  priceTotal:'32.99',
+  count:1
 },
 {
   id:9,
@@ -80,24 +96,30 @@ class App extends React.Component {
   img:'стул4.jpg',
   desc:'lorem lorem ipsum',
   category:'chairs',
-  price:'229.99'
+  price:'229.99',
+  priceTotal:'229.99',
+  count:1
 },
     ],
     showFullTem:false,
     fullItem:{},
+   countOrders:[],
     }
     this.state.categories=this.state.items
     this.addToOrder = this.addToOrder.bind(this)
     this.deleteOrder=this.deleteOrder.bind(this)
     this.chooseOrders=this.chooseOrders.bind(this)
     this.onShowItem=this.onShowItem.bind(this)
+    this.chancheCount=this.chancheCount.bind(this)
+    this.anChancheCount=this.anChancheCount.bind(this)
   }
   render (){
+   
     return(
     <div className="wrapper">
-      <Header orders ={this.state.orders} onDelete={this.deleteOrder}/>
+      <Header anChancheCount={this.anChancheCount} chancheCount={this.chancheCount} countOrders={this.state.countOrders}  orders ={this.state.orders} onDelete={this.deleteOrder}/>
       <Categories onChoose={this.chooseOrders} />
-      <Items onShowItem={this.onShowItem} items={this.state.categories} onAdd={this.addToOrder}/>
+      <Items  onShowItem={this.onShowItem} items={this.state.categories} onAdd={this.addToOrder}/>
       {this.state.showFullTem && <ShowFullItem onAdd={this.addToOrder} onShowItem={this.onShowItem} item={this.state.fullItem}/>}
       <Footer />
     </div>
@@ -107,12 +129,35 @@ onShowItem (item){
   this.setState({fullItem:item})
 this.setState({showFullTem:!this.state.showFullTem})
 }
-addToOrder(item){
+
+chancheCount(item){
+  console.log({...item,count:item.count})
+  const updatedItem = { ...item, count: item.count + 1 }
+  
+  this.setState({
+    orders:[...this.state.orders.map( el => el.id ===item.id ? updatedItem : el )]})
+}
+
+
+
+anChancheCount(item){
+  const updatedItem = { ...item, count: item.count - 1 } 
+  if(item.count >1){
+  
+  console.log(this.state.orders)
+  this.setState({orders:[...this.state.orders.map( el => el.id ===item.id ? updatedItem : el )]}) }
+}
+
+addToOrder(item,id){
+  
+  
   let isInArray = false
+  
   this.state.orders.forEach( el =>{
     if(el.id===item.id)
-    isInArray = true
     
+  
+    isInArray = true
   })
 
   if(!isInArray)

@@ -129,6 +129,15 @@ header .shop-cart .summ{
     font-weight: 600;
     margin-bottom: 10px;
 }
+.minus-item ,.plus-item{
+    margin: 10px;
+    padding: 3px;
+    background: #f2f2f2;
+    border-radius: 50%;
+    font-weight: 600;
+    border: 1px solid #f2f2f2cd;
+    cursor: pointer;
+}
 .categories div{
     display: inline-block;
     background: #f2f2f2;
@@ -153,7 +162,23 @@ header .shop-cart .summ{
     background: rgba(0, 0, 0, 0.8);
     z-index: 2;
     overflow: auto;
+   
     
+}
+.close-show{
+    position: absolute;
+    font-size: 20px;
+    top:0;
+    right: 0;
+    padding: 5px;
+    background: #f2f2f2;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: transform 300ms ease;
+}
+.close-show:hover{
+    transform: scale(1.05);
+
 }
 .full-item >div{
     width: 600px;
